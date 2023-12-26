@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TripHelper
+</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTrzUamdb4exWeanRObNc6_82JBZ7Rins&libraries=places"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+    
+
+  <div class="container">
+    <label for="city">Podaj miasto</label>
+    <input type="text" id="city" placeholder="Miasto">
+    <button onclick="fetchMostPopularPlaces()">Pokaż najbardziej popularne miejsca</button>
+    <button id="clearButton" ">Wyczyść</button>
+
+<br>
+<button onclick="toggleContainer()">Pokaż więcej opcji</button>
+
+</div>
+<div class="container2" id="container2" style="display: none;">
+    <label for="range">Podaj obszar w kilometrach (10 domyślnie ):</label>
+    <input type="number" id="range" placeholder="Range in km" value="10"> 
+    <label for="maxAttractions">Maksymalna liczba wyników:</label>
+    <input type="number" id="maxAttractions" placeholder="Max Attractions" value="5"> 
+    <label for="attractionType">Wybierz czego szukasz:</label>
+    <select id="attractionType">
+      <option value="amusement_park">Park rozrywki</option>
+      <option value="art_gallery">Galeria Sztuki</option>
+      <option value="museum">Muzeum</option>
+      <option value="park">Park</option>
+      <option value="shopping_mall">Galeria Handlowa</option>
+      <option value="zoo">Zoo</option>
+      <option value="church">Kosciół</option>
+  
+    </select>
+    <button onclick="fetchPlaces()">Pokaż</button>
+    <button id="clearButton2" ">Wyczyść</button>
+
+</div>
+  <div class="container" id="placesList"></div>
+
+  <script>
+    document.getElementById('placesList').style.display = 'none';
+    document.getElementById('clearButton').addEventListener('click', clearPlaces);
+
+    function clearPlaces() {
+    // Clear placesList content
+    document.getElementById('placesList').innerHTML = "<h2>Places</h2>";
+
+    // Hide the placesList and the "Clear" button again
+    document.getElementById('placesList').style.display = 'none';
+}
+
+// Button click event for "Clear" button
+
+    // Function to initialize the Places Autocomplete for the city input
+    function initAutocomplete() {
+      const cityInput = document.getElementById('city');
+      const autocomplete = new google.maps.places.Autocomplete(cityInput);
+    }
+    // Event listener to initialize Autocomplete when the window loads
+    google.maps.event.addDomListener(window, 'load', initAutocomplete);
+  </script>
+</body>
+</html>
